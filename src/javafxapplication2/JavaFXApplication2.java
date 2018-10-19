@@ -11,11 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -33,30 +35,31 @@ public class JavaFXApplication2 extends Application {
         File folder = new File("src/pelis");
         File[] listOfFiles = folder.listFiles();
         int posX = 10;
-        int posY = 300;
+        int posY = 320;
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                //System.out.println("File " + listOfFiles[i].getName());
                 Button btn = new Button();
                 btn.setText(listOfFiles[i].getName());
                 btn.setLayoutX(posX);
                 btn.setLayoutY(posY);
-                posY += 30;
-                if (i%15 == 14) {posX += 300; posY = 300;}
+                btn.setStyle("-fx-background-color: #0033ff; -fx-text-fill: #ffffff");
+                
+
+                btn.setMaxSize(250, 30);
+                btn.setMinSize(250, 30);
+                posY += 35;
+                if (i%13 == 12 && i < 26) {posX += 280; posY = 320;}
+                if (i%26 == 25) { posY = 10;}
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     reproduce(btn.getText());
                 }
-
             });
             root.getChildren().add(btn);
             } 
         }
-
-        
-        Scene scene = new Scene(root, 1024, 768);
-
+        Scene scene = new Scene(root, 830, 800);
         primaryStage.setTitle("Ahora vídeos!");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -71,6 +74,7 @@ public class JavaFXApplication2 extends Application {
         mediaView = new MediaView(player);
         mediaView.setLayoutX(10);
         mediaView.setLayoutY(10);
+        mediaView.setFitHeight(300);
         root.getChildren().add(mediaView);
 
         player.play();
