@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
  *
  * @author Jorge HP
  */
-public class JavaFXApplication2 extends Application {
+public class Principal extends Application {
 
     MediaPlayer player;
     MediaView mediaView;
